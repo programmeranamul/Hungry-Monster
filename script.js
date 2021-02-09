@@ -1,119 +1,102 @@
-const searchButton = document.getElementById("searchButton");
-const notFound = document.getElementById("notFound");
-const searchArea = document.getElementById("searchArea");
-const header = document.getElementById("header");
-const mealItemsContainer = document.getElementById("mealItemsContainer");
-const emptyInputPopup = document.getElementById("emptyInputPopup");
+const mealContainer = document.getElementById("mealContainer");
+const emptyInputMassege = document.getElementById("emptyInputMassege");
+const nothingFoundMassege = document.getElementById("nothingFound");
 const mealItemDetails = document.getElementById("mealItemDetails");
+const searchArea = document.getElementById("searchArea");
 
-
-//Call Api And Get Meal Data From Api By Clicked In Search Button
-const getMealList = () => {
-    //Get Input Value
-    let searchInputMeal = document.getElementById('searchBox').value.trim();
-    //If Your Try To Search By A Meal Name
-    if (searchInputMeal.length > 0) {
-        //Call Api
-        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInputMeal}`)
-            .then(res => res.json())
-            .then(data => displayMealList(data));
+//Call Api And Get Meals data From Api By Clicked In Search Button
+const searchMeal = () => {
+    //Get Input Value  
+    const searchText = document.getElementById("searchBox").value.trim();
+    //If User Search By A Meal Name
+    if (searchText.length > 0) {
+        const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => displayMeals(data));
     }
-    //If Your Try To Search With Out Input A Meal Name
+    //If User Try To Search By Nothing
     else {
-        emptyInputPopup.style.display = "block";
-        notFound.style.display = "none";
-        mealItemsContainer.style.visibility = "hidden";
+        emptyInputMassege.style.display = "block";
+        mealContainer.style.visibility = "hidden"
+        nothingFoundMassege.style.display = "none";
     }
 }
 
-
-//Search Button Event Handler
-searchButton.addEventListener("click", getMealList);
-
-
-// Display Meal Data
-const displayMealList = data => {
-
-    let mealItem = "";
-    // If there are Meal items
-    if (data.meals) {
-
-        data.meals.forEach(meal => {
-
-            mealItem += `           
-            <div class="meal-item" onclick="getSingleMaleItem('${meal.idMeal}')">
-            <img src="${meal.strMealThumb}" alt="" class="meal-item-image">
-            <h3>${meal.strMeal}</h2>
-            </div>
+//Display Meals Data
+const displayMeals = (meals) => {
+    //If there are Meal items   
+    if (meals.meals) {
+        mealContainer.innerHTML = "";
+        meals.meals.forEach(meal => {
+            //work with dom
+            const mealDiv = document.createElement("div");
+            mealDiv.className = "meal";
+            mealDiv.innerHTML = `
+                <div onclick = "getSingleMale('${meal.idMeal}')">
+                    <img src="${meal.strMealThumb}" alt="" class="meal-image">
+                    <h3>${meal.strMeal}</h2>
+                </div>
             `;
+            mealContainer.appendChild(mealDiv);
 
-            notFound.style.display = "none";
-            emptyInputPopup.style.display = "none";
-            mealItemsContainer.style.visibility = "visible";
-
+            mealContainer.style.visibility = "visible";
+            nothingFoundMassege.style.display = "none";
+            emptyInputMassege.style.display = "none";
         });
     }
     //If Meal items are not available
     else {
-
-        const notFound = document.getElementById("notFound");
-        notFound.style.display = "block";
-        emptyInputPopup.style.display = "none";
-
+        nothingFoundMassege.style.display = "block";
+        emptyInputMassege.style.display = "none";
     }
-    mealItemsContainer.innerHTML = mealItem;
 }
 
-
 //Get Single Male Items Details
-const getSingleMaleItem = mealId => {
+const getSingleMale = mealId => {
     // Call Api
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
         .then(response => response.json())
-        .then(data => displaySingleMaleItemDetails(data.meals[0]))
+        .then(data => displayMealDetails(data.meals[0]));
 }
 
-
-// display single male item
-const displaySingleMaleItemDetails = singleItem => {
-
+// display single male item Details
+const displayMealDetails = male => {
     mealItemDetails.style.display = "block";
     searchArea.style.visibility = "hidden";
-    mealItemsContainer.style.visibility = "hidden";
-
+    mealContainer.style.visibility = "hidden";
     //creat ingredients array
     const ingredients = [];
     for (let i = 0; i <= 20; i++) {
-        if (singleItem[`strIngredient${i}`]) {
+        if (male[`strIngredient${i}`]) {
             ingredients.push(
-                `${singleItem[`strIngredient${i}`]}-${singleItem[`strMeasure${i}`]}`
+                `${male[`strIngredient${i}`]}-${male[`strMeasure${i}`]}`
             );
         }
     }
 
-    // wark with single images pop  up area dom
+    // wark with single male item Details dom
     mealItemDetails.innerHTML = `
         <div class="mealItemDetails-image">
-        <img src="${singleItem.strMealThumb}" alt="">
+        <img src="${male.strMealThumb}" alt="">
         </div>
         <div class="mealItemDetailsInfo">
-            <h1>${singleItem.strMeal}</h1>
+            <h1>${male.strMeal}</h1>
             <h3>Ingredients</h3>
             <ul>
              ${ingredients.map((ing) => `<li><i class="fas fa-check-square"></i> ${ing}</li>`).join("")}                
             </ul>
-            <button id="coloseButton" onclick = closeMealItemDetails() >Close</button>
+            <button id="coloseButton" onclick = closeMealDetails() >Close</button>
         </div>
-        <div id="closeIcon" onclick = closeMealItemDetails()>
+        <div id="closeIcon" onclick = closeMealDetails()>
             <i class="fas fa-times"></i>
         </div>
     `;
 }
 
-
 //Close Male Single Item Details
-const closeMealItemDetails = () => {
+const closeMealDetails = () => {
     searchArea.style.visibility = "visible";
     mealItemDetails.style.display = "none";
-    mealItemsContainer.style.visibility = "visible";
+    mealContainer.style.visibility = "visible";
 }

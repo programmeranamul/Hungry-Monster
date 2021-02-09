@@ -1,27 +1,16 @@
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-.border-none {
-    border: none;
-}
-
-.display-grid {
-    display: grid;
-}
-
-a {
-    text-decoration: none;
-}
-
-.container {
+#container{
     width: 90%;
-    margin: 0 auto;
+    max-width: 960px;
+    margin: 0 auto;   
 }
 
-.nav-bar {
+/* Start Header Styling */
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,91 +22,94 @@ a {
     font-size: 20px;
     font-weight: 700;
     color: black;
+    text-decoration: none;
 }
 
-.search-area {
+/* End Header Styling */
+
+/* Start Search Area */
+#searchArea{
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px 0;
 }
-
-#searchBox {
+#searchBox{
     width: 300px;
     padding: 15px;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 5px 0 0 5px;
+    border: none;
 }
-
-#searchButton {
+.searchButton {
     color: white;
     padding: 15px;
     background-color: orangered;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+    border: none;
 }
-
-#searchBox:focus, #searchButton:focus {
+#searchBox:focus, .searchButton:focus {
     outline: none;
 }
+/* End Search Area */
 
-#mealItemsContainer {
+/* Start Meal Area */
+#mealContainer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
 }
-
-.meal-item {
+.meal {
     cursor: pointer;
     text-align: center;
     border-radius: 10px;
     background-color: rgba(128, 128, 128, .1);
 }
-
-.meal-item img {
+.meal img {
     width: 100%;
     border-radius: 10px 10px 0 0;
 }
-
-.meal-item h3 {
+.meal h3 {
     padding: 15px 0;
 }
+/* End Meal Area */
 
-#notFound, #emptyInputPopup {
+/* Start Empty Input and Nothing Found  Massege Style*/
+#nothingFound , #emptyInputMassege{
+    top: 20%;
+    left: 17%;
+}
+
+#nothingFound, #emptyInputMassege { 
+    position: absolute;
     background-color: rgba(135, 206, 235, 0.1);
     padding: 50px;
     font-size: 30px;
     text-align: center;
     color: rebeccapurple;
+    margin: 50px auto 0;
     margin-top: 50px;
     display: none;
-    /* visibility: visible; */
+    
 }
+/* Start Empty Input and Nothing Found  Massege Style*/
 
-#emptyInputPopup {
-    position: absolute;
-    left: 50%;
-    top: 30%;
-    transform: translate(-50%, -30%);
-}
-
+/* Start Single Meal Details Style*/
 #mealItemDetails {
     position: absolute;
     background-color: rgba(135, 206, 235, 0.1);
     top: 15%;
     left: 50%;
     transform: translate(-50%);
-    width: 50%;
-    /* display: none; */
+    width: 50%;   
     box-shadow: 0px 5px 27px grey;
     border-radius: 5px;
 }
-
 #mealItemDetails img {
     width: 100%;
     border-radius: 10px;
 }
-
 #mealItemDetails h1 {
     font-size: 40px;
     margin: 20px 0;
@@ -143,7 +135,6 @@ a {
     color: tomato;
     margin-right: 10px;
 }
-
 #coloseButton {
     position: absolute;
     bottom: 1%;
@@ -168,3 +159,4 @@ a {
 .mealItemDetailsInfo {
     padding: 20px;
 }
+/* End Single Meal Details Style*/

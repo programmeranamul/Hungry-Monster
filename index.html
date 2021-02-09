@@ -6,64 +6,76 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hungry Monster</title>
+    <!-- Style Sheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="container">
+    <div id="container">
         <!-- Start Header Area -->
-        <header id="header">
-            <nav class="nav-bar">
+        <div id="heder">
+            <nav class="navbar">
+                <!-- Start Logo Area -->
                 <div class="logo-area">
                     <h2>Hungry Moster</h2>
                 </div>
+                <!-- End Logo Area -->
+
+                <!-- Menu area start-->
                 <div class="menu-area ">
                     <a href="#">Home</a>
                     <a href="#">Abou</a>
                     <a href="#">Recipes</a>
                     <a href="#">Blog</a>
                 </div>
+                <!-- Menu area End-->
             </nav>
-        </header>
+        </div>
         <!-- End Header Area -->
 
-        <!-- Start Main Content Area -->
+        <!-- Start Main Area -->
         <main>
-            
             <!-- Start Search Area -->
             <div id="searchArea" class="search-area">
                 <input type="text" id="searchBox" class="border-none " placeholder="Search for meal">
-                <button id="searchButton" class="border-none text-white">Search</button>
+                <button onclick="searchMeal()" class="searchButton">Search</button>
             </div>
             <!-- End Search Area -->
 
-            <!-- Start Search Result Meal area -->
-            <div id="mealItemsContainer">
+            <!-- Start Meal Area -->
+            <div id="mealContainer">
+                <!-- <div class="meal">
+                    <img src="img/food.jpeg" alt="" class="meal-image">
+                    <h3>Food Name</h2>
+                </div> -->                
             </div>
+            <!-- End Meal Area -->
 
-            <div id="emptyInputPopup">
+            <!-- Start Empty Input Search Massege Area -->
+            <div id="emptyInputMassege">
                 <h2>Please Input A Meal Name...</h2>
             </div>
+            <!-- End Empty Input Search Massege Area -->
 
-            <div id="notFound">
+            <!-- Start Nothing Found Area -->
+            <div id="nothingFound">
                 <h2>Sorry, we didn't find any meal!</h2>
             </div>
-            <!-- End Search Result Meal area -->
-
-            <!-- Start Single Meal Details -->
+            <!-- End Nothing Found Area -->
+            <!-- Start Single Meal Item Details -->
             <div id="mealItemDetails">
             </div>
-            <!-- Start Single Meal Details -->
+            <!-- Start Single Meal Item Details -->
 
         </main>
-        <!-- End Main Content Area -->
+        <!-- End Main Area -->
     </div>
-
     <!-- Font Awesome Js Start -->
     <script src="https://kit.fontawesome.com/8537fea902.js" crossorigin="anonymous"></script>
     <!-- Font Awesome Js End -->
-    <!-- //<script src="script.js"></script> -->
+    <!-- custom js file start-->
     <script src="script.js"></script>
+    <!-- custom js file End-->
 </body>
 
 </html>
