@@ -33,7 +33,7 @@ const displayMeals = (meals) => {
             const mealDiv = document.createElement("div");
             mealDiv.className = "meal";
             mealDiv.innerHTML = `
-                <div onclick = "getSingleMale('${meal.idMeal}')">
+                <div onclick = "getSingleMaleDetails('${meal.idMeal}')">
                     <img src="${meal.strMealThumb}" alt="" class="meal-image">
                     <h3>${meal.strMeal}</h2>
                 </div>
@@ -54,7 +54,7 @@ const displayMeals = (meals) => {
 }
 
 //Get Single Male Items Details
-const getSingleMale = mealId => {
+const getSingleMaleDetails = mealId => {
     // Call Api
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
         .then(response => response.json())
