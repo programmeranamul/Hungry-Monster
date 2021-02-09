@@ -5,7 +5,7 @@ const mealItemDetails = document.getElementById("mealItemDetails");
 const searchArea = document.getElementById("searchArea");
 
 //Call Api And Get Meals data From Api By Clicked In Search Button
-const searchMeal = () => {
+const searchMeals = () => {
     //Get Input Value  
     const searchText = document.getElementById("searchBox").value.trim();
     //If User Search By A Meal Name
