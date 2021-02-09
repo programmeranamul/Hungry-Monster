@@ -18,7 +18,7 @@ const searchMeal = () => {
     //If User Try To Search By Nothing
     else {
         emptyInputMassege.style.display = "block";
-        mealContainer.style.visibility = "hidden"
+        mealContainer.style.visibility = "hidden";
         nothingFoundMassege.style.display = "none";
     }
 }
@@ -47,6 +47,7 @@ const displayMeals = (meals) => {
     }
     //If Meal items are not available
     else {
+        mealContainer.style.visibility = "hidden";
         nothingFoundMassege.style.display = "block";
         emptyInputMassege.style.display = "none";
     }
